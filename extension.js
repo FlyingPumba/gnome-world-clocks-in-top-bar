@@ -100,7 +100,7 @@ export default class WorldClockExtension extends Extension {
     _onTimezonesChanged() {
         // Remove all existing clocks
         for (const indicator of this._indicators.values()) {
-            indicator.indicator.destroy();
+            indicator.destroy();
         }
         this._indicators.clear();
 
@@ -112,7 +112,7 @@ export default class WorldClockExtension extends Extension {
         if (Main.sessionMode.isLocked) {
             // Remove all indicators when screen is locked
             for (const indicator of this._indicators.values()) {
-                indicator.indicator.destroy();
+                indicator.destroy();
             }
             this._indicators.clear();
         } else {
