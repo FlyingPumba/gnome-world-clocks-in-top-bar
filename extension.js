@@ -44,8 +44,8 @@ export default class WorldClockExtension extends Extension {
         }
         
         // Destroy all indicators
-        for (const indicator of this._indicators.values()) {
-            indicator.destroy();
+        for (const item of this._indicators.values()) {
+            item.indicator.destroy();
         }
         this._indicators.clear();
 
@@ -99,8 +99,8 @@ export default class WorldClockExtension extends Extension {
 
     _onTimezonesChanged() {
         // Remove all existing clocks
-        for (const indicator of this._indicators.values()) {
-            indicator.destroy();
+        for (const item of this._indicators.values()) {
+            item.indicator.destroy();
         }
         this._indicators.clear();
 
@@ -111,8 +111,8 @@ export default class WorldClockExtension extends Extension {
     _onSessionModeChanged() {
         if (Main.sessionMode.isLocked) {
             // Remove all indicators when screen is locked
-            for (const indicator of this._indicators.values()) {
-                indicator.destroy();
+            for (const item of this._indicators.values()) {
+                item.indicator.destroy();
             }
             this._indicators.clear();
         } else {
