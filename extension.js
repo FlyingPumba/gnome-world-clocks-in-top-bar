@@ -17,8 +17,14 @@ export default class WorldClockExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
         
-        // Create initial clocks
-        this._createClocks();
+        // Add screen lock monitoring
+        this._sessionModeChangedId = Main.sessionMode.connect('updated',
+            () => this._onSessionModeChanged());
+        
+        // Only create clocks if screen is not locked
+        if (!Main.sessionMode.isLocked) {
+            this._createClocks();
+        }
         
         // Start the timer
         this._timeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
@@ -46,6 +52,11 @@ export default class WorldClockExtension extends Extension {
         if (this._settingsChangedId) {
             this._settings.disconnect(this._settingsChangedId);
             this._settingsChangedId = null;
+        }
+
+        if (this._sessionModeChangedId) {
+            Main.sessionMode.disconnect(this._sessionModeChangedId);
+            this._sessionModeChangedId = null;
         }
     }
 
@@ -95,5 +106,18 @@ export default class WorldClockExtension extends Extension {
 
         // Create new clocks
         this._createClocks();
+    }
+
+    _onSessionModeChanged() {
+        if (Main.sessionMode.isLocked) {
+            // Remove all indicators when screen is locked
+            for (const indicator of this._indicators.values()) {
+                indicator.indicator.destroy();
+            }
+            this._indicators.clear();
+        } else {
+            // Recreate indicators when screen is unlocked
+            this._createClocks();
+        }
     }
 } 
