@@ -1,0 +1,12 @@
+{
+    "name": "World Clocks in Top Bar",
+    "description": "Shows world clocks in the top bar",
+    "uuid": "worldclocksintopbar@iarcuschin.com",
+    "shell-version": [
+        "45",
+        "46"
+    ],
+    "url": "https://github.com/FlyingPumba/gnome-world-clocks-in-top-bar",
+    "version": 1,
+    "settings-schema": "org.gnome.shell.extensions.world-clocks-in-top-bar"
+} 

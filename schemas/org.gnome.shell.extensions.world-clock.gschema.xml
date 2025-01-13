@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.world-clocks-in-top-bar" path="/org/gnome/shell/extensions/world-clocks-in-top-bar/">
+    <key name="timezones" type="as">
+      <default>['UTC']</default>
+      <summary>Timezones</summary>
+      <description>List of timezones to display in the panel</description>
+    </key>
+  </schema>
+</schemalist>
